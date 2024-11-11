@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "target": "ES6",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "outDir": "./dist"
+    },
+    "include": ["src/**/*.ts", "src/contexts/AuthContext.tsx"],
+    "exclude": ["node_modules"]
+}
