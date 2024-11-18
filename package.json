@@ -1,0 +1,30 @@
+{
+  "name": "farradmarketplace",
+  "version": "0.1.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && npm start",
+    "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\"",
+    "postinstall": "concurrently \"npm run install:client\" \"npm run install:server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belovmerci/OnlineMarketPlace.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/belovmerci/OnlineMarketPlace/issues"
+  },
+  "homepage": "https://github.com/belovmerci/OnlineMarketPlace#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

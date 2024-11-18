@@ -35,6 +35,7 @@ export const initDb = async () => {
       );
     `);
     */
+   
     // Create Products table
     await database.exec(`
       CREATE TABLE IF NOT EXISTS Products (
@@ -54,7 +55,7 @@ export const initDb = async () => {
         Weight REAL,
         Material TEXT,
         SuspensionType TEXT,
-        Color TEXT,
+        Color INTEGER,
         ModelYear INTEGER,
         FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
       );
