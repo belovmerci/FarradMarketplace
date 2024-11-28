@@ -1,24 +1,13 @@
-// src/pages/HomePage.tsx
-import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../services/api';
-import { Card, Row, Col } from 'antd';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetchProducts().then(setProducts);
-  }, []);
-
   return (
-    <Row gutter={16}>
-      {products.map((product: any) => (
-        <Col span={8} key={product.ProductID}>
-
-        </Col>
-      ))}
-    </Row>
-    // <Card title={product.Name} description={product.Description} />
+    <div>
+      <h1>Welcome to FarradMarketplace</h1>
+      <p>Your one-stop shop for premium bicycles and more!</p>
+      <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+    </div>
   );
 };
 

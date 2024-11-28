@@ -3,10 +3,11 @@ import { getDb } from '../db/db';
 import { verifyAccessToken } from '../db/tokens';
 
 const router = Router();
-const db = getDb()!;
+
 
 // Get all orders for a user
 router.get('/:userId', (req: Request, res: Response) => {
+  const db = getDb()!;
   const userId = req.params.userId;
 
   try {
@@ -20,6 +21,7 @@ router.get('/:userId', (req: Request, res: Response) => {
 
 // Create a new order
 router.post('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   const { userId, shippingAddressId, totalAmount, paymentStatus, orderStatus } = req.body;
 
   try {

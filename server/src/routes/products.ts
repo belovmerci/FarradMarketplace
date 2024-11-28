@@ -2,10 +2,10 @@ import { Router, Request, Response } from 'express';
 import { getDb } from '../db/db';
 
 const router = Router();
-const db = getDb()!;
 
 // Get all products
 router.get('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   try {
     const products = db.all('SELECT * FROM Products');
     res.status(200).json(products);
@@ -17,6 +17,7 @@ router.get('/', (req: Request, res: Response) => {
 
 // Add a new product
 router.post('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   const { name, description, price, stockQuantity, categoryId } = req.body;
 
   try {

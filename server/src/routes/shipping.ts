@@ -2,10 +2,10 @@ import { Router, Request, Response } from 'express';
 import { getDb } from '../db/db';
 
 const router = Router();
-const db = getDb()!;
 
 // Get all shipping addresses
 router.get('/:userId', (req: Request, res: Response) => {
+  const db = getDb()!;
   const userId = req.params.userId;
 
   try {
@@ -19,6 +19,7 @@ router.get('/:userId', (req: Request, res: Response) => {
 
 // Add a shipping address
 router.post('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   const { userId, address, city, country, postalCode, phoneNumber } = req.body;
 
   try {

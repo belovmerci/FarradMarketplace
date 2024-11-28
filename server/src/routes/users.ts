@@ -2,10 +2,10 @@ import { Router, Request, Response } from 'express';
 import { getDb } from '../db/db';
 
 const router = Router();
-const db = getDb()!;
 
 // Get all users
 router.get('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   try {
     const users = db.all('SELECT * FROM Users');
     res.status(200).json(users);
@@ -17,6 +17,7 @@ router.get('/', (req: Request, res: Response) => {
 
 // Add a new user
 router.post('/', (req: Request, res: Response) => {
+  const db = getDb()!;
   const { username, passwordHash, email, role } = req.body;
 
   try {

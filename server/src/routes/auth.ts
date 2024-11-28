@@ -4,10 +4,10 @@ import { generateAccessToken, generateRefreshToken } from '../db/tokens';
 import { getUserByUsername } from '../db/users';
 
 const router = Router();
-const db = getDb()!;
 
 // User login
 router.post('/login', async (req: Request, res: Response) => {
+  const db = getDb()!;
   const { username, passwordHash } = req.body;
 
   try {
@@ -56,6 +56,7 @@ router.post('/login', async (req: Request, res: Response) => {
 
 // User registration
 router.post('/register', async (req: Request, res: Response) => {
+  const db = getDb()!;
   const { username, passwordHash, email, role } = req.body;
 
   try {

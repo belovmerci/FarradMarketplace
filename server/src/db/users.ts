@@ -1,9 +1,9 @@
 import sqlite3 from 'sqlite3';
 import { getDb } from './db';
-const db = getDb()!;
 
 // Fetch all users
 export const getAllUsers = (): Promise<any[]> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.all('SELECT * FROM Users', (error: any, rows: any[]) => {
       if (error) {
@@ -18,6 +18,7 @@ export const getAllUsers = (): Promise<any[]> => {
 
 // Fetch a specific user by ID
 export const getUserById = (userId: string): Promise<any> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.get('SELECT * FROM Users WHERE UserID = ?', [userId], (error: any, row: any) => {
       if (error) {
@@ -32,6 +33,7 @@ export const getUserById = (userId: string): Promise<any> => {
 
 // Fetch a specific user by name
 export const getUserByUsername = (userId: string): Promise<any> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.get('SELECT * FROM Users WHERE Username = ?', [userId], (error: any, row: any) => {
       if (error) {
@@ -46,6 +48,7 @@ export const getUserByUsername = (userId: string): Promise<any> => {
 
 // Create a new user
 export const createUser = (username: string, passwordHash: string): Promise<{ userId: number }> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.run(
       'INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)',
@@ -64,6 +67,7 @@ export const createUser = (username: string, passwordHash: string): Promise<{ us
 
 // Update a user by ID
 export const updateUser = (userId: string, username: string, passwordHash: string): Promise<void> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.run(
       'UPDATE Users SET Username = ?, PasswordHash = ? WHERE UserID = ?',
@@ -82,6 +86,7 @@ export const updateUser = (userId: string, username: string, passwordHash: strin
 
 // Delete a user by ID
 export const deleteUser = (userId: string): Promise<void> => {
+  const db = getDb()!;
   return new Promise((resolve, reject) => {
     db.run('DELETE FROM Users WHERE UserID = ?', [userId], (error: any) => {
       if (error) {
