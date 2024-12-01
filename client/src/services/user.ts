@@ -1,3 +1,5 @@
+import react from 'react';
+
 export const fetchUserDetails = async (): Promise<{ username: string; userId: number }> => {
     const response = await fetch('/api/users/me', {
       headers: {
