@@ -1,19 +1,39 @@
 import React, { createContext, useContext, useState } from 'react';
 import { getToken, login, logout as performLogout, register } from '../services/auth';
-import { fetchUserDetails } from '../services/user'; // Add a new service for user details
 
 interface User {
+  id: number;
   username: string;
-  userId: number;
+  email: string;
 }
 
 interface AuthContextType {
+  user: User | null;
   isAuthenticated: boolean;
-  user: User | null; // Add user details
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   register: (username: string, password: string, email: string) => Promise<void>;
 }
+
+export const parseToken = (token: string): User => {
+  try {
+    // Split the token to extract the payload
+    const [, payload] = token.split('.');
+    if (!payload) throw new Error('Invalid token format');
+
+    // Decode the base64-encoded payload
+    const decodedPayload = atob(payload);
+
+    // Parse the JSON payload to extract user info
+    const { id, username, email } = JSON.parse(decodedPayload);
+
+    // Return the user object
+    return { id, username, email };
+  } catch (error) {
+    console.error('Failed to parse token:', error);
+    throw new Error('Invalid token');
+  }
+};
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -23,13 +43,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
-  const [user, setUser] = useState<User | null>(null); // User state
-
-  const handleLogin = async (username: string, password: string) => {
-    await login(username, password);
+  const [user, setUser] = useState<User | null>(null);
+  
+    const handleLogin = async (username: string, password: string) => {
+    const token = await login(username, password);
     setIsAuthenticated(true);
-    const userDetails = await fetchUserDetails(); // Fetch user details after login
-    setUser(userDetails);
+    const userInfo = parseToken(token); // Decode or fetch user info using the token
+    setUser(userInfo);
   };
 
   const handleLogout = () => {
@@ -37,20 +57,35 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsAuthenticated(false);
     setUser(null);
   };
+  
 
   const handleRegister = async (username: string, password: string, email: string) => {
-    await register(username, password, email);
+    const token = await register(username, password, email);
     setIsAuthenticated(true);
-    const userDetails = await fetchUserDetails(); // Fetch user details after registration
-    setUser(userDetails);
+    const userInfo = parseToken(token);
+    setUser(userInfo);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login: handleLogin, logout: handleLogout, register: handleRegister }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login: handleLogin, logout: handleLogout, register: handleRegister }}>
       {children}
     </AuthContext.Provider>
   );
 };
+  /*
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login: handleLogin,
+        logout: handleLogout,
+        register: handleRegister,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+  */
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

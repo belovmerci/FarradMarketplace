@@ -1,4 +1,3 @@
-// src/pages/LoginPage.tsx
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Form, Input, Button, message } from 'antd';
@@ -13,10 +12,10 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       await login(values.username, values.password);
-      message.success('Logged in successfully');
+      message.success('Успешная авторизация!');
       navigate('/');
     } catch (error) {
-      message.error('Login failed');
+      message.error('Провал авторизации!');
     } finally {
       setLoading(false);
     }

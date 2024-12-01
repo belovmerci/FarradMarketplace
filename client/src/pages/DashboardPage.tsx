@@ -5,7 +5,7 @@ const DashboardPage: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
   if (!isAuthenticated) {
-    return <p>Please log in to access your dashboard.</p>;
+    return <p>Пожалуйста, авторизуйтесь для использования панели пользователя.</p>;
   }
 
   return (
@@ -13,12 +13,12 @@ const DashboardPage: React.FC = () => {
       <h1>Dashboard</h1>
       {user ? (
         <>
-          <p>Welcome, {user.username}!</p>
-          <p>Your User ID: {user.userId}</p>
-          <button onClick={logout}>Logout</button>
+          <p>Добро пожаловать, {user.username}!</p>
+          <p>Ваш уникальный ID: {user.id}</p>
+          <button onClick={logout}>Выход</button>
         </>
       ) : (
-        <p>Loading your details...</p>
+        <p>Загрузка данных...</p>
       )}
     </div>
   );

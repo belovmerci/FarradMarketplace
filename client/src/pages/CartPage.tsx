@@ -8,7 +8,7 @@ interface CartItem {
 }
 
 const CartPage: React.FC = () => {
-  // Dummy cart dat
+  // Dummy cart ddata
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { id: 1, name: 'Mountain Bike', price: 500, quantity: 1 },
     { id: 2, name: 'Road Bike', price: 700, quantity: 2 }

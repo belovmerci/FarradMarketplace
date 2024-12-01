@@ -14,7 +14,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const fetchProducts = async () => {
+export const getProducts = async () => {
   const response = await api.get('/products');
   return response.data;
 };
@@ -28,6 +28,12 @@ export const createOrder = async (orderData: any) => {
   const response = await api.post('/orders', orderData);
   return response.data;
 };
+
+export const submitOrder = async (cart: { id: number; quantity: number }[]) => {
+  const response = await axios.post('/api/orders', { items: cart });
+  return response.data;
+};
+
 
 // Mock payment
 export const processPayment = async (amount: number) => {

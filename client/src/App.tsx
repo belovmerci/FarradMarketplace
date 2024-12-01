@@ -1,25 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+
+import Header from './components/Header';
+
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import DashboardPage from './pages/DashboardPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import RegisterPage from './pages/RegisterPage';
-import CartPage from './pages/CartPage';
-import PrivateRoute from './components/PrivateRoute';
 
-const App = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-      </Route>
-    </Routes>
-  </Router>
-);
+import { CartProvider } from './contexts/CartContext';
+import { AuthProvider } from './contexts/AuthContext';
+
+const App = () => {
+  return (
+      <CartProvider>
+        <AuthProvider>
+
+        <BrowserRouter>
+        <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+
+            <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+          </Routes>
+        </BrowserRouter>
+
+      </AuthProvider>
+    </CartProvider>
+  );
+};
 
 export default App;
