@@ -1,0 +1,33 @@
+/* General header styling */
+.header {
+    background-color: #f8f9fa; /* Light background */
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  /* Navigation bar styling */
+  .header-nav {
+    display: flex;
+    justify-content: space-around; /* Evenly distribute links */
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Link styling */
+  .header-link {
+    text-decoration: none; /* Remove underline */
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    transition: color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .header-link:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  
+  .header-link:active {
+    color: #0056b3; /* Active link color */
+  }
+  

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/general.css';
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();

@@ -1,8 +1,9 @@
 import React from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useApp } from '../contexts/AppContext';
+import '../styles/general.css';
 
 const DashboardPage: React.FC = () => {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useApp();
 
   if (!isAuthenticated) {
     return <p>Пожалуйста, авторизуйтесь для использования панели пользователя.</p>;

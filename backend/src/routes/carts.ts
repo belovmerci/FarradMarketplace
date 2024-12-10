@@ -21,10 +21,10 @@ router.get('/:userId', (req: Request, res: Response) => {
 // Add a product to the cart
 router.post('/', async (req: Request, res: Response) => {
   const db = getDb()!;
-  const { userId, productId, quantity } = req.body;
+  const { UserID, ProductId, Quantity } = req.body;
 
   try {
-    const result = await db.run(`INSERT INTO Carts (UserID, ProductID, Quantity) VALUES (?, ?, ?)`, [userId, productId, quantity]);
+    const result = await db.run(`INSERT INTO Carts (UserID, ProductID, Quantity) VALUES (?, ?, ?)`, [UserID, ProductId, Quantity]);
     res.status(201).json({ message: 'Item added to cart' });
   } catch (error) {
     console.error('Error adding to cart:', error);

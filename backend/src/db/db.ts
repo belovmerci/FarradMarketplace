@@ -22,20 +22,6 @@ export const initDb = async () => {
       );
     `);
 
-    /*
-    await database.exec(`
-      CREATE TABLE IF NOT EXISTS Products (
-        ProductID INTEGER PRIMARY KEY AUTOINCREMENT,
-        Name TEXT NOT NULL,
-        Description TEXT,
-        Price REAL NOT NULL,
-        StockQuantity INTEGER NOT NULL,
-        CategoryID INTEGER NOT NULL,
-        FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
-      );
-    `);
-    */
-   
     // Create Products table
     await database.exec(`
       CREATE TABLE IF NOT EXISTS Products (
@@ -58,6 +44,19 @@ export const initDb = async () => {
         Color INTEGER,
         ModelYear INTEGER,
         FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+      );
+    `);
+
+    // Create OrderItems table
+    await database.exec(`
+      CREATE TABLE IF NOT EXISTS OrderItems (
+        OrderItemID INTEGER PRIMARY KEY AUTOINCREMENT,
+        OrderID INTEGER NOT NULL,
+        ProductID INTEGER NOT NULL,
+        Quantity INTEGER NOT NULL,
+        PricePerUnit REAL NOT NULL,
+        FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+        FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
       );
     `);
 
@@ -100,13 +99,12 @@ export const initDb = async () => {
     await database.exec(`
       CREATE TABLE IF NOT EXISTS ShippingAddresses (
         ShippingAddressID INTEGER PRIMARY KEY AUTOINCREMENT,
-        UserID INTEGER NOT NULL,
-        Address TEXT NOT NULL,
-        City TEXT NOT NULL,
-        Country TEXT NOT NULL,
-        PostalCode TEXT NOT NULL,
-        PhoneNumber TEXT NOT NULL,
-        FOREIGN KEY (UserID) REFERENCES Users(UserID)
+        Name TEXT NOT NULL,
+        Address TEXT NULL,
+        City TEXT NULL,
+        Country TEXT NULL,
+        PostalCode TEXT NULL,
+        PhoneNumber TEXT NULL
       );
     `);
 

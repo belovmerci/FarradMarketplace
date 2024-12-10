@@ -9,6 +9,8 @@ const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'your-refresh-t
  * @returns A signed JWT access token.
  */
 export const generateAccessToken = (userId: number): string => {
+  console.log(userId);
+  console.log(jwt.decode(jwt.sign({ userId }, ACCESS_TOKEN_SECRET, { expiresIn: '15m' })));
   return jwt.sign({ userId }, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 };
 

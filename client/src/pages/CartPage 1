@@ -1,0 +1,64 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useApp } from '../contexts/AppContext';
+import '../styles/general.css';
+
+const CartPage: React.FC = () => {
+  interface CartItem {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+  }
+
+  const { cart, updateCart } = useApp();
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
+
+  // Set cartItems when cart from context changes
+  useEffect(() => {
+    setCartItems(cart); // Set cart items from the context
+  }, [cart]);
+
+  const handleQuantityChange = (id: number, quantity: number) => {
+    setCartItems(prevItems => {
+      const updatedItems = prevItems.map(item => 
+        item.id === id ? { ...item, quantity } : item
+      );
+      updateCart(updatedItems); // Update the cart in context
+      return updatedItems;
+    });
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
+
+  return (
+    <div>
+      <h2>Your Cart</h2>
+      {cartItems.length === 0 ? (
+        <p>В корзине пусто, и ей одиноко! <a href="/">Добавьте в неё товаров</a></p>
+      ) : (
+        <div>
+          {cartItems.map(item => (
+            <div key={item.id}>
+              <h4>{item.name}</h4>
+              <p>Price: ${item.price}</p>
+              <input
+                type="number"
+                value={item.quantity}
+                min="1"
+                onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+              />
+              <p>Subtotal: ${item.price * item.quantity}</p>
+            </div>
+          ))}
+          <button onClick={handleCheckout}>Checkout</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CartPage;

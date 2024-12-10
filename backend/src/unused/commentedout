@@ -1,0 +1,53 @@
+  /*
+// Serve product form
+router.get('/add-product', (req: Request, res: Response) => {
+  if (!isLoggedIn) {
+    return res.redirect('/admin');
+  }
+  res.send(`
+    <html>
+      <body>
+        <h1>Add New Product</h1>
+        <form method="POST" action="/admin/add-product">
+          <label for="name">Product Name:</label>
+          <input type="text" id="name" name="name" required>
+          <br>
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required></textarea>
+          <br>
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" step="0.01" required>
+          <br>
+          <label for="stockQuantity">Stock Quantity:</label>
+          <input type="number" id="stockQuantity" name="stockQuantity" required>
+          <br>
+          <label for="categoryId">Category ID:</label>
+          <input type="number" id="categoryId" name="categoryId" required>
+          <br>
+          <label for="imageUrl">Image URL:</label>
+          <input type="text" id="imageUrl" name="imageUrl">
+          <br>
+          <button type="submit">Add Product</button>
+        </form>
+        <a href="/admin/logout">Logout</a>
+      </body>
+    </html>
+  `);
+});
+*/
+
+/*
+await database.exec(`
+  CREATE TABLE IF NOT EXISTS Products (
+    ProductID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Description TEXT,
+    Price REAL NOT NULL,
+    StockQuantity INTEGER NOT NULL,
+    CategoryID INTEGER NOT NULL,
+    FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+  );
+`);
+*/
+
+

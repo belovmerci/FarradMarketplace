@@ -18,12 +18,12 @@ router.get('/', (req: Request, res: Response) => {
 // Add a new user
 router.post('/', (req: Request, res: Response) => {
   const db = getDb()!;
-  const { username, passwordHash, email, role } = req.body;
+  const { Username, PasswordHash, Email, Role } = req.body;
 
   try {
     db.run(
       'INSERT INTO Users (Username, PasswordHash, Email, Role) VALUES (?, ?, ?, ?)',
-      [username, passwordHash, email, role]
+      [Username, PasswordHash, Email, Role]
     );
     res.status(201).json({ message: 'User added successfully' });
   } catch (error) {

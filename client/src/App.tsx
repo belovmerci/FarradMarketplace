@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Routes, Route, Router, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AppProvider } from './contexts/AppContext';
 import Header from './components/Header';
 
@@ -14,7 +14,6 @@ import RegisterPage from './pages/RegisterPage';
 const App = () => {
   return (
     <AppProvider>
-      <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -25,7 +24,6 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
         </Routes>
-      </BrowserRouter>
     </AppProvider>
   );
 };

@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install:client": "cd client && npm install",
+    "install:backend": "cd backend && npm install",
     "install:server": "cd server && npm install",
-    "start:client": "cd client && npm start",
+    "start:backend": "cd backend && npm start",
     "start:server": "cd server && npm start",
-    "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:server\"",
-    "postinstall": "concurrently \"npm run install:client\" \"npm run install:server\""
+    "start": "concurrently --kill-others \"npm run run:backend\" \"npm run start:server\"",
+    "postinstall": "concurrently \"npm run install:backend\" \"npm run install:server\""
   },
   "repository": {
     "type": "git",
